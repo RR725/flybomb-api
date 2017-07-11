@@ -9,6 +9,7 @@ module.exports = new db.Schema({
 	title: { type: String, validate: titleValidate },
 	content: { type: Array },
 	createTime: { type: Date },
+	point: { type: String, default: '' },
 	modifyTime: { type: Date },
 	answer: { type: String },
 	questionId: { type: Number, default: 0 },
