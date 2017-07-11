@@ -41,11 +41,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 // app.use('/users', users);
-app.post('/restapi/subject/add', subject.add);
-app.post('/restapi/subject/list', subject.list);
-app.post('/restapi/question/add', question.add);
-app.post('/restapi/question/list', question.list);
-app.post('/restapi/question/find/one', question.findOne);
+app.post('/restapi/flybomb/subject/add', subject.add);
+app.post('/restapi/flybomb/subject/list', subject.list);
+app.post('/restapi/flybomb/question/add', question.add);
+app.post('/restapi/flybomb/question/list', question.list);
+app.post('/restapi/flybomb/question/find/one', question.findOne);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
