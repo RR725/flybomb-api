@@ -59,7 +59,6 @@ exports.update = function (req, res) {
 };
 
 exports.list = function (req, res) {
-	console.log(req.session)
 	let body = req.body;
 	let json = {};
 	for (let i in body) {
