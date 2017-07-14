@@ -25,7 +25,7 @@ exports.add = function (req, res) {
 		point: body.point || '',
 		createTime: Date.now(),
 		modifyTime: Date.now(),
-		content: body['content[]']
+		content: body['content']
 	});
 	name.save(function (err) {
 		if (err) {
@@ -38,6 +38,7 @@ exports.add = function (req, res) {
 };
 exports.update = function (req, res) {
 	const body = req.body;
+	console.log(body)
 	var data = {
 		subject: body.subject,
 		title: body.title,
@@ -45,7 +46,7 @@ exports.update = function (req, res) {
 		point: body.point || '',
 		answer: body.answer,
 		modifyTime: Date.now(),
-		content: body['content[]']
+		content: body['content']
 	};
 	const questionId = body.questionId;
 	Question.update({ questionId: questionId }, data, function (err) {
