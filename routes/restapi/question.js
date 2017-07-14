@@ -58,6 +58,45 @@ exports.update = function (req, res) {
 
 };
 
+exports.listRandom = function (req, res) {
+	let body = req.body;
+	let json = {
+		subject: body.subject,
+		type: body.type,
+	};
+	let query = Question.find(json);
+	query.count(json, function (err, count) {
+		if (count === 0) {
+			count = 1;
+		}
+		let pageNum = count * Math.random();
+		pageNum = Math.ceil(pageNum);
+		let pageSize = 1;
+		query.skip((pageNum - 1) * pageSize);
+		query.limit(pageSize);
+		query.find(function (err, doc) {
+			if (err) {
+				res.send({ code: '500', value: null, message: err.errors.title.message });
+				return;
+			}
+			let value = null;
+			if (doc.length) {
+
+				value = {
+					questionId: doc[0].questionId,
+					subject: doc[0].subject,
+					title: doc[0].title,
+					type: doc[0].type,
+					point: doc[0].point,
+					answer: doc[0].answer,
+					content: doc[0].content
+				};
+			}
+			res.send({ code: '200', value: value });
+		});
+	})
+
+}
 exports.list = function (req, res) {
 	let body = req.body;
 	let json = {};
@@ -112,7 +151,7 @@ exports.findOne = function (req, res) {
 				subject: data.subject,
 				title: data.title,
 				type: data.type,
-				point:data.point|| '',
+				point: data.point || '',
 				answer: data.answer,
 				content: data.content
 			};
