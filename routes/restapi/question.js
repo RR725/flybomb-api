@@ -108,7 +108,7 @@ exports.list = function (req, res) {
 			json[i] = body[i];
 		}
 	}
-	let query = Question.find(json);
+	let query = Question.find(json).sort({modifyTime:'desc'});
 	query.count(json, function (err, count) {
 		let pageNum = parseInt(body.pageNum || 1);
 		let pageSize = parseInt(body.pageSize || 10);
