@@ -22,6 +22,7 @@ exports.add = function (req, res) {
 		title: body.title,
 		type: body.type,
 		answer: body.answer,
+		tags: body.tags,
 		point: body.point || '',
 		createTime: Date.now(),
 		modifyTime: Date.now(),
@@ -43,6 +44,7 @@ exports.update = function (req, res) {
 		subject: body.subject,
 		title: body.title,
 		type: body.type,
+		tags: body.tags,
 		point: body.point || '',
 		answer: body.answer,
 		modifyTime: Date.now(),
@@ -88,6 +90,7 @@ exports.listRandom = function (req, res) {
 					subject: doc[0].subject,
 					title: doc[0].title,
 					type: doc[0].type,
+					tags: doc[0].tags,
 					point: doc[0].point,
 					answer: doc[0].answer,
 					content: doc[0].content
@@ -108,7 +111,7 @@ exports.list = function (req, res) {
 			json[i] = body[i];
 		}
 	}
-	let query = Question.find(json).sort({modifyTime:'desc'});
+	let query = Question.find(json).sort({ modifyTime: 'desc' });
 	query.count(json, function (err, count) {
 		let pageNum = parseInt(body.pageNum || 1);
 		let pageSize = parseInt(body.pageSize || 10);
@@ -128,6 +131,7 @@ exports.list = function (req, res) {
 					title: data.title,
 					type: data.type,
 					point: data.point,
+					tags: data.tags,
 					answer: data.answer,
 					content: data.content
 				});
@@ -153,6 +157,7 @@ exports.findOne = function (req, res) {
 				title: data.title,
 				type: data.type,
 				point: data.point || '',
+				tags: data.tags,
 				answer: data.answer,
 				content: data.content
 			};
