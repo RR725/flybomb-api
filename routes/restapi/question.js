@@ -143,7 +143,7 @@ exports.list = function (req, res) {
 }
 exports.findOne = function (req, res) {
 	const body = req.body;
-	var query = Question.where({ questionId: body.id });
+	var query = Question.where({ questionId: body.questionId });
 	query.findOne(function (err, data) {
 		if (err) {
 			res.send({ code: '500', value: null, message: err.errors.title.message });
@@ -163,5 +163,46 @@ exports.findOne = function (req, res) {
 			};
 		};
 		res.send({ code: '200', value: value });
+	});
+}
+exports.findTags = function (req, res) {
+	const body = req.body;
+	var query = Question.find({ questionId: { $ne: body.questionId }, tags: { $in: body.tags } });
+	query.find(function (err, doc) {
+		if (err) {
+			console.log(err);
+			res.send({ code: '500', value: null, message: err.errors.title.message });
+			return;
+		}
+
+		let value = [];
+		doc.map(function (data, key) {
+			value.push({
+				questionId: data.questionId,
+				subject: data.subject,
+				title: data.title,
+				type: data.type,
+				point: data.point,
+				tags: data.tags,
+				answer: data.answer,
+				content: data.content
+			});
+		});
+		let result = [];
+		let total = value.length;
+		let size = 5;
+		let keys = [];
+
+		if (total > size) {
+			for (let i = 0; i < size; i++) {
+				let rdm = Math.floor(value.length * Math.random());
+				result.push(value[rdm]);
+				value.splice(rdm, 1);
+			}
+
+		} else {
+			result = value;
+		}
+		res.send({ code: '200', value: result });
 	});
 }

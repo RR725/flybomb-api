@@ -49,7 +49,7 @@ app.post('/restapi/flybomb/question/list', question.list);
 app.post('/restapi/flybomb/question/list/random', question.listRandom);
 
 app.post('/restapi/flybomb/question/find/one', question.findOne);
-
+app.post('/restapi/flybomb/question/recommend', question.findTags);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
 	var err = new Error('Not Found');
