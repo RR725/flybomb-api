@@ -16,7 +16,7 @@ questionSchema.pre('save', function (next) {
 var Question = db.model('question', questionSchema)
 exports.add = function (req, res) {
 	const body = req.body;
-	console.log(body)
+
 	var name = new Question({
 		subject: body.subject,
 		title: body.title,
@@ -28,13 +28,27 @@ exports.add = function (req, res) {
 		modifyTime: Date.now(),
 		content: body['content']
 	});
-	name.save(function (err) {
+
+	var query = Question.where({ title: body.title });
+	query.findOne(function (err, data) {
 		if (err) {
 			res.send({ code: '500', value: null, message: err.errors.title.message });
 			return;
 		}
-		res.send({ code: '200', value: true });
+		if (data) {
+			res.send({ code: '500', value: null, message: '已经存在相同的题目' });
+			return;
+		} else {
+			name.save(function (err) {
+				if (err) {
+					res.send({ code: '500', value: null, message: err.errors.title.message });
+					return;
+				}
+				res.send({ code: '200', value: true });
+			})
+		}
 	})
+
 
 };
 exports.update = function (req, res) {
@@ -143,7 +157,7 @@ exports.list = function (req, res) {
 }
 exports.findOne = function (req, res) {
 	const body = req.body;
-	var query = Question.where({ questionId: body.questionId });
+	var query = Question.where(body);
 	query.findOne(function (err, data) {
 		if (err) {
 			res.send({ code: '500', value: null, message: err.errors.title.message });
