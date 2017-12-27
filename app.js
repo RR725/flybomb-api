@@ -1,6 +1,7 @@
 var mongoose = require("mongoose");
 var uri = "mongodb://127.0.0.1/flybomb";
 
+
 mongoose.Promise = global.Promise;
 mongoose.connect(uri, {
 	useMongoClient: true
