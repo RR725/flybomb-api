@@ -181,7 +181,7 @@ exports.findOne = function (req, res) {
 }
 exports.findTags = function (req, res) {
 	const body = req.body;
-	var query = Question.find({ questionId: { $ne: body.questionId }, tags: { $in: body.tags } });
+	var query = Question.find({ questionId: { $ne: body.questionId },subject: body.subject, tags: { $in: body.tags } });
 	query.find(function (err, doc) {
 		if (err) {
 			console.log(err);
