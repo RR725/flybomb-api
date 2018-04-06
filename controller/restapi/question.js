@@ -102,7 +102,7 @@ exports.listRandom = function (req, res) {
 				value = {
 					questionId: doc[0].questionId,
 					subject: doc[0].subject,
-					subjectId: doc.subjectId,
+					subjectId: doc[0].subjectId,
 					title: doc[0].title,
 					type: doc[0].type,
 					tags: doc[0].tags,
