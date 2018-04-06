@@ -14,5 +14,6 @@ module.exports = new db.Schema({
 	modifyTime: { type: Date },
 	answer: { type: String },
 	questionId: { type: Number, default: 0 },
-	subject: { type: String, required: true }
+	subject: { type: String, required: true },
+	subjectId: { type: Number, required: true }
 });

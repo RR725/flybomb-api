@@ -16,9 +16,9 @@ questionSchema.pre('save', function (next) {
 var Question = db.model('question', questionSchema)
 exports.add = function (req, res) {
 	const body = req.body;
-
 	var name = new Question({
 		subject: body.subject,
+		subjectId: body.subjectId,
 		title: body.title,
 		type: body.type,
 		answer: body.answer,
@@ -78,7 +78,7 @@ exports.update = function (req, res) {
 exports.listRandom = function (req, res) {
 	let body = req.body;
 	let json = {
-		subject: body.subject,
+		subjectId: body.subject,
 		type: body.type,
 	};
 	let query = Question.find(json);
@@ -102,6 +102,7 @@ exports.listRandom = function (req, res) {
 				value = {
 					questionId: doc[0].questionId,
 					subject: doc[0].subject,
+					subjectId: doc.subjectId,
 					title: doc[0].title,
 					type: doc[0].type,
 					tags: doc[0].tags,
@@ -142,6 +143,7 @@ exports.list = function (req, res) {
 				value.push({
 					questionId: data.questionId,
 					subject: data.subject,
+					subjectId: data.subjectId,
 					title: data.title,
 					type: data.type,
 					point: data.point,
@@ -168,6 +170,7 @@ exports.findOne = function (req, res) {
 			value = {
 				questionId: data.questionId,
 				subject: data.subject,
+				subjectId: data.subjectId,
 				title: data.title,
 				type: data.type,
 				point: data.point || '',
@@ -194,6 +197,7 @@ exports.findTags = function (req, res) {
 			value.push({
 				questionId: data.questionId,
 				subject: data.subject,
+				subjectId: data.subjectId,
 				title: data.title,
 				type: data.type,
 				point: data.point,
