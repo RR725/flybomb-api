@@ -13,7 +13,7 @@ var favicon = require("serve-favicon");
 var logger = require("morgan");
 var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
-// var session = require('express-session');
+var session = require('express-session');
 
 var routes = require("./routes/index");
 // var users = require('./routes/users');
@@ -25,11 +25,13 @@ app.set("view engine", "jade");
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-// app.use(session({
-// 	secret: 'KDJFJ_Kfjk212312ffdgggFWERW-ER3242G3G3', // 建议使用 128 个字符的随机字符串
-// 	cookie: { maxAge: 60 * 1000 },
-// 	name:'_flybomb_session'
-// }));
+app.use(session({
+	secret: 'KDJFJ_Kfjk212312ffdgggFWERW-ER3242G3G3', // 建议使用 128 个字符的随机字符串
+	cookie: { maxAge: 60 * 60 * 1000 },
+	saveUninitialized:false,
+	resave: false,
+	name:'_flybomb_session'
+}));
 
 app.use(logger("dev"));
 app.use(bodyParser.json());
