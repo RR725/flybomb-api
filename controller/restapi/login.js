@@ -15,19 +15,7 @@ exports.checkLogin = (req, res) => {
 }
 exports.login = function(req, res) {
   const body = req.body
-  let loginCount = req.session.loginCount || 0
-  let lastLoginTime = req.session.lastLoginTime || 0
-  const now = Date.now()
-  req.session.lastLoginTime = now
-  req.session.loginCount = loginCount + 1
-  if (loginCount > 8 && now - lastLoginTime < 300 * 1000) {
-    res.send({
-      code: '500',
-      value: null,
-      message: '登录太频繁'
-    })
-    return
-  }
+ 
   // let query = User.where({ name: body.name });
   User.findOne({ name: body.name }, (err, result) => {
     if (err) {
