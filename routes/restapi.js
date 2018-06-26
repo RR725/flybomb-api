@@ -1,6 +1,7 @@
-var subject = require("../controller/restapi/subject");
-var question = require("../controller/restapi/question");
-var login = require("../controller/restapi/login");
+const subject = require("../controller/restapi/subject");
+const question = require("../controller/restapi/question");
+const login = require("../controller/restapi/login");
+const common = require("../controller/restapi/common");
 
 module.exports = function(app) {
 	app.post("/restapi/flybomb/subject/add", subject.add);
