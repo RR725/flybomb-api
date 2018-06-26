@@ -1,15 +1,14 @@
-module.exports = function(req, res) {
-  console.log(req.session.uid)
+module.exports = function(req, res,next) {
   let sess = req.session
   let userName = sess.uid
 
   const body = req.body
-  let loginCount = sess.loginCount || 0
-  let lastLoginTime = sess.lastLoginTime || 0
+  let operateCount = sess.operateCount || 0
+  let lastOperateTime = sess.lastOperateTime || 0
   const now = Date.now()
-  req.session.lastLoginTime = now
-  req.session.loginCount = loginCount + 1
-  if (loginCount > 8 && now - lastLoginTime < 300 * 1000) {
+  req.session.lastOperateTime = now
+  req.session.operateCount = operateCount + 1
+  if (operateCount > 50 && now - lastOperateTime < 300 * 1000) {
     res.send({
       code: '500',
       value: null,
@@ -17,4 +16,9 @@ module.exports = function(req, res) {
     })
     return
   }
+  // if(1){
+  //   res.send({code:3});
+  //   return;
+  // }
+  next();
 }
