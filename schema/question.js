@@ -9,7 +9,7 @@ let titleValidate = [
 module.exports = new db.Schema({
 	type: { type: Number },
 	title: { type: String,required: true, validate: titleValidate },
-	content: { type: Array ,required: true},
+	content: { type: Array },
 	createTime: { type: Date },
 	tags: { type: Array },
 	point: { type: String, default: "" },
