@@ -41,6 +41,7 @@ exports.add = function (req, res) {
 		} else {
 			name.save(function (err) {
 				if (err) {
+                                        console.log(err)
 					res.send({ code: '500', value: null, message: err.errors.title.message });
 					return;
 				}
