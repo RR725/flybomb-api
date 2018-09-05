@@ -8,7 +8,6 @@ module.exports = function(req, res,next) {
   let lastOperateTime = sess.lastOperateTime || 0
   if(operateCount % 50 === 0){
     req.session.lastOperateTime = now
-    operateCount = 0
   }
   req.session.operateCount = operateCount + 1
   if (operateCount > 50 && now - lastOperateTime < 300 * 1000) {
