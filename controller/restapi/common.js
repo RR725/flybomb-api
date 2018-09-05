@@ -4,9 +4,12 @@ module.exports = function(req, res,next) {
 
   const body = req.body
   let operateCount = sess.operateCount || 0
-  let lastOperateTime = sess.lastOperateTime || 0
   const now = Date.now()
-  req.session.lastOperateTime = now
+  let lastOperateTime = sess.lastOperateTime || 0
+  if(operateCount % 50 === 0){
+    req.session.lastOperateTime = now
+    operateCount = 0
+  }
   req.session.operateCount = operateCount + 1
   if (operateCount > 50 && now - lastOperateTime < 300 * 1000) {
     res.send({
