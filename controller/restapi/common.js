@@ -5,13 +5,11 @@ module.exports = function(req, res, next) {
     const body = req.body;
     let operateCount = sess.operateCount || 0;
     const now = Date.now();
-    let lastOperateTime = sess.lastOperateTime || 0;
     if (operateCount % 50 === 0) {
-        req.session.lastOperateTime = now;
+        req.session.initOperateTime = now;
     }
-
     req.session.operateCount = operateCount + 1;
-    if (operateCount > 50 && now - lastOperateTime < 60 * 1000) {
+    if (operateCount > 50 && now - req.session.initOperateTime < 60 * 1000) {
         res.send({
             code: '500',
             value: null,
