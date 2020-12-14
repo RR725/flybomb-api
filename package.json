@@ -11,6 +11,7 @@
     "debug": "~2.2.0",
     "express": "~4.13.1",
     "express-session": "^1.15.3",
+    "fs-path": "0.0.25",
     "jade": "~1.11.0",
     "moment": "^2.29.1",
     "mongoose": "^4.11.1",
